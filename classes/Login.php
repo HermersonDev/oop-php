@@ -33,7 +33,7 @@ class Login
 
 	public function __invoke()
 	{
-		$str = "props: username(String), email(String), senha(Number).";
+		$str = "props: ucsername(String), email(String), senha(Number).";
 		return $str;
 	}
 
