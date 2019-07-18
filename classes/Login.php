@@ -2,58 +2,73 @@
 
 namespace Classes;
 
+use \Exception;
+use Classes\Person;
+
 class Login
 {
-	private $username;
-	private $email;
-	private $senha;
+	private $data = array();
 
-	public function __construct($username, $email, $senha)
+	public function __construct($username, $email, $password)
 	{
 		$this->username = $username;
-		$this->setEmail($email);
-		$this->setSenha($senha);
+		$this->email = $email;
+		$this->password = $password;
 	}
 
-	public function getUsername()
+	public function __get($property)
 	{
-		return $this->username;
+		return $this->data[$property];
 	}
 
-	public function getEmail()
+	public function __set($property, $value)
 	{
-		return $this->email;
+		$this->data[$property] = $value;
 	}
 
-	public function setEmail($email)
+	public function __toString()
 	{
-		$this->email = $email; 
+		return "Class Login";
 	}
 
-	public function getSenha()
+	public function __invoke()
 	{
-		return $this->senha;
+		$str = "props: username(String), email(String), senha(Number).";
+		return $str;
 	}
 
-	public function setSenha($senha)
-	{
-		$this->senha = $senha; 
+	public function enter($email, $password) 
+	{	
+		try {
+
+			$this->validate($email, $password);
+
+			if ($this->email === $email && $this->password === $password) {
+				echo "Bem-vindo, $this->username !";
+			} else {
+				echo "Dados inválidos!";
+			}
+
+		} catch (Exception $e) {
+			if ($e->getCode() === 1) {
+				echo $e->getMessage() . " - Por favor verifique seu email.";
+			} else {
+				echo $e->getMessage() . " - Por favor verifique sua password.";
+			}
+		}
+
 	}
 
-	public function enter() 
+	private function validateData($email, $password)
 	{
-		if ($this->email === 'ne.hermerson@gmail.com' 
-			&& $this->senha === '123') {
-			echo "Bem-vindo, $this->username !";
-		} else {
-			echo "Dados inválidos!";
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			throw new Exception('Email inválido', 1);
+		}
+
+		if (!filter_var($password, FILTER_VALIDATE_INT)) {
+			throw new Exception('A password é apenas números', 2);
 		}
 	}
+
 }
 
-$login = new Login('Hermerson', 'ne.hermerson@gmail.com', '123');
-$login->enter();
-echo '<br>';
-echo $login->getUsername() . "<br>";
-echo $login->getEmail() . "<br>";
-echo $login->getSenha() . "<br>";

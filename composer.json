@@ -1,0 +1,11 @@
+{
+    "name": "hermerson/oop-php",
+    "description": "php oop",
+    "authors": [
+        {
+            "name": "HermersonDev",
+            "email": "ne.hermerson@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,5 +1,61 @@
 <?php
 
+// require 'classes/Person.php';
+
+// use Classes\Person;
+
+// $hermerson = new Person();
+// $hermerson->name = "Hermerson";
+// $hermerson->lastname = "Araújo";
+// $hermerson->age = 22;
+
+// $hermerson->setParent('Sandra');
+// echo $hermerson->getParent()->name;
+
+
+require 'classes/Person.php';
+require 'classes/Login.php';
+
+use Classes\Person;
+use Classes\Login;
+
+$hermerson = new Person();
+$hermerson->name = "Hermerson";
+$hermerson->lastname = "Araújo";
+$hermerson->age = 22;
+
+$usuario = new Login('hermerson', 'ne.hermerson@gmail.com', 123);
+$usuario->person = $hermerson;
+
+
+echo 'Nome do Usuário - ' .  $usuario->username . '<hr>';
+echo 'Email do Usuário - ' .  $usuario->email . '<hr>';
+echo 'Password do Usuário - ' .  $usuario->password . '<hr>';
+echo 'Primeiro Nome - ' .  $usuario->person->name . '<hr>';
+echo 'Segundo Nome - ' .  $usuario->person->lastname . '<hr>';
+echo 'Idade - ' .  $usuario->person->age . '<hr>';
+$usuario->person->falar();
+echo 'toString - ' .  $usuario . '<hr>';
+echo 'invoke - ' .  $usuario() . '<hr>';
+
+/*
+-----------------------------------------------------------
+
+require 'classes/Login.php';
+
+use Classes\Login;
+
+$usuario = new Login('hermerson', 'ne.hermerson@gmail.com', 123);
+
+echo "Login válido ! <hr>";
+$usuario->enter('ne.hermerson@gmail.com', 123);
+echo "<hr> Login inválido email <hr>";
+$usuario->enter('ne.hermerson@com', 123);
+echo "<hr> Login inválido password <hr>";
+$usuario->enter('ne.hermerson@gmail.com', 'abc');
+
+-------------------------------------------------------
+
 require 'classes/Person.php';
 
 use Classes\Person;
@@ -14,8 +70,8 @@ echo '<hr> Hermerson Real - ' . $hermerson->name;
 $clone = clone $hermerson;
 echo '<hr> Hermerson Clone - ' . $clone->name;
 
+-----------------------------------------------------------
 
-/*
 require './classes/BikeSpeed.php';
 
 $caloi_10 = new BikeSpeed();
