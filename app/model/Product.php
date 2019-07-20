@@ -3,11 +3,12 @@
 namespace App\Model;
 
 class Product 
-{
+{	
 	private $data = array();
 
-	public function __construct($name, $desc)
+	public function __construct($id, $name, $desc)
 	{
+		$this->id = $id;
 		$this->name = $name;
 		$this->desc = $desc;
 	}
